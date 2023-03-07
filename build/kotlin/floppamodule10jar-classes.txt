@@ -1,0 +1,1 @@
+/Users/nolan/Documents/floppamodule/build/classes/kotlin/main/floppaclient/module/impl/misc/ExternalModule.class
