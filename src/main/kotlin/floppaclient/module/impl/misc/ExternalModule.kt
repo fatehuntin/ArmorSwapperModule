@@ -2,7 +2,6 @@ package floppaclient.module.impl.dungeon
 
 
 import floppaclient.FloppaClient.Companion.inDungeons
-import floppaclient.FloppaClient.Companion.inSkyblock
 import floppaclient.FloppaClient.Companion.mc
 import floppaclient.module.Category
 import floppaclient.module.Module
@@ -12,8 +11,6 @@ import floppaclient.module.settings.impl.NumberSetting
 import floppaclient.module.AlwaysActive
 import floppaclient.utils.ChatUtils
 import floppaclient.utils.ChatUtils.modMessage
-import net.minecraft.command.ICommandSender
-import net.minecraft.inventory.ContainerChest
 import net.minecraft.util.StringUtils.stripControlCodes
 import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.fml.common.eventhandler.EventPriority
@@ -63,7 +60,7 @@ object ExternalModule : Module(
     private val f2 = BooleanSetting("F/M2", default = false)
     private val f1 = BooleanSetting("F/M1", default = false)
     private val bloodopen = BooleanSetting("Blood open", default = false)
-    private var thread: Thread? = null
+
 
     init {
         this.addSettings(
@@ -96,38 +93,9 @@ object ExternalModule : Module(
         when (stripControlCodes(event.message.unformattedText)) {
             "[BOSS] Maxor WELL WELL WELL LOOK WHO'S HERE!" -> {
                 modMessage("Detected in f7 bossfight, swapping armor")
-                fun processCommand(sender: ICommandSender?, args: Array<String>) {
-                    if (!inSkyblock) return
-                    if (args.isEmpty()) {
-                        modMessage("Specify slot")
-                        return
-                    }
-                    val wdslot = args[0].toInt()
-                    ChatUtils.sendChat("/wardrobe")
-                    if (thread == null || !thread!!.isAlive) {
-                        thread = Thread({
-                            for (i in 0..100) {
-                                if (mc.thePlayer.openContainer is ContainerChest && mc.thePlayer.openContainer?.inventorySlots?.get(
-                                        0
-                                    )?.inventory?.name?.startsWith("Wardrobe") == true
-                                ) {
-                                    mc.playerController.windowClick(
-                                        mc.thePlayer.openContainer.windowId,
-                                        35 + wdslot,
-                                        0,
-                                        0,
-                                        mc.thePlayer
-                                    )
-                                    mc.thePlayer.closeScreen()
-                                    return@Thread
-                                }
-                                Thread.sleep(20)
-                            }
-                            modMessage("§aWarobe failed, timed out")
-                        }, "Auto wardrobe")
-                        return
-                    }
-                }
+                ChatUtils.sendChat("/fwd $wdslot")
+                return
             }
         }
-    }}
+    }
+}
