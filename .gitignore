@@ -5,3 +5,36 @@ build
 .DS_Store
 build/
 build*
+.DS_Store
+build/classes/kotlin/main/floppaclient/module/impl/misc/ExternalModule.class
+build/kotlin/compileKotlin/cacheable/caches-jvm/inputs/source-to-output.tab.values.at
+# eclipse
+eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# vscode
+.vscode
+
+# idea
+out
+classes
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+#Netbeans
+.nb-gradle
+.nb-gradle-properties
+
+# other
+run
