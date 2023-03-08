@@ -1,3 +1,11 @@
+# Floppa Client Module for armor swapping in dungeons
+Config is simple, wardrobe slots only work for the first page and go from 1-9 with the first slot being 1
+As with the floppa client mod this is use at your own risk
+Put the module in the /config/modules folder in your .minecraft folder
+
+Feel free to build the module yourself or take the prebuilt jar from releases
+
+Original README from Aton
 # External Modules for Floppa Client Template
 
 This Repository serves as a template for creating external modules for Floppa Client.
